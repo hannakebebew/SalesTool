@@ -20,7 +20,7 @@ public class TestLoginFacebook {
 	private WebDriver driver;
 	
 	@Test(dataProvider="excelData", dataProviderClass = testng.datadriven.ExcelReader.class)
-	public void loginFacebookTest(String username, String password) throws IOException {
+	public void loginFacebookTest(String username, String password) throws IOException, InterruptedException {
 		
 		driver = webDriverCollection.getChromeDriver();
 		driver.navigate().to("http://www.facebook.com");
@@ -35,8 +35,16 @@ public class TestLoginFacebook {
 		
 		driver.findElement(By.xpath("//*[@id=\"pass\"]")).sendKeys(password);
 		
-		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[@id=\"u_0_w\"]"))));
-		driver.findElement(By.xpath("//*[@id=\"u_0_w\"]")).click();
+		
+		
+		
+		Thread.sleep(2000);
+		
+		String logInid = driver.findElement(By.xpath("//*[@id=\"loginbutton\"]")).getAttribute("for");
+		
+		System.out.println(logInid);
+		
+		driver.findElement(By.id(logInid)).click();;
 		
 		
 		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
