@@ -42,7 +42,7 @@ public class TestLoginFacebook {
 		
 		String logInid = driver.findElement(By.xpath("//*[@id=\"loginbutton\"]")).getAttribute("for");
 		
-		System.out.println(logInid);
+		System.out.println("This will be used to find element" + logInid);
 		
 		driver.findElement(By.id(logInid)).click();;
 		
